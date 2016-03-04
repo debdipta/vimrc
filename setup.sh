@@ -14,6 +14,9 @@ sudo apt-get install make
 echo "Running: sudo apt-get install cscope"
 sudo apt-get install cscope
 
+echo "Running: sudo apt-get install vim"
+sudo apt-get install vim
+
 echo "Running: sudo apt-get install git"
 sudo apt-get install git
 
@@ -34,3 +37,10 @@ git clone https://github.com/debdipta/vimrc.git
 
 echo "Running: https://github.com/debdipta/tista.git"
 git clone https://github.com/debdipta/tista.git
+cd
+echo "Copying vimrc"
+cp ~/vimrc/vimrc ~/.vimrc
+
+echo "alias vi=/"vim/"" >> ~/.profile
+echo "EDITOR=vim" >> ~/.profile
+echo "export EDITOR " >> ~/.profile

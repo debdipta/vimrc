@@ -76,3 +76,4 @@ else
   map <M-Down> ]s
   map <M-Up> [s
 endif
+  set nospell
