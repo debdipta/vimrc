@@ -1,4 +1,7 @@
 #!/bin/bash
+
+cd
+
 echo "Running :sudo apt-get update"
 sudo apt-get update
 
@@ -41,6 +44,6 @@ cd
 echo "Copying vimrc"
 cp ~/vimrc/vimrc ~/.vimrc
 
-echo "alias vi=/"vim/"" >> ~/.profile
+echo "alias vi="/usr/bin/vim"" >> ~/.profile
 echo "EDITOR=vim" >> ~/.profile
 echo "export EDITOR " >> ~/.profile
