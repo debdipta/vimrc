@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 
     while (fgets(sendline, MAXLINE, stdin) != NULL)
     {
-
+        printf("Sending %s", sendline);
         send(sockfd, sendline, strlen(sendline), 0); 
         if
             (recv(sockfd, recvline, MAXLINE,0) == 0){
