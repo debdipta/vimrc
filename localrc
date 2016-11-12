@@ -1,0 +1,25 @@
+ubuntu@deb001:~/devstack$ cat localrc
+HOST_IP=15.213.178.252
+
+ADMIN_PASSWORD=stack
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+SERVICE_TOKEN=$ADMIN_PASSWORD
+SWIFT_HASH=$ADMIN_PASSWORD
+SWIFT_TEMPURL_KEY=$ADMIN_PASSWORD
+PIP_USE_MIRRORS=False
+USE_GET_PIP=1
+
+
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
+disable_service cinder c-sch c-api c-vol
+
+disable_service heat h-api h-api-cfn h-api-cw h-eng
+GIT_BASE=http://git.openstack.org
