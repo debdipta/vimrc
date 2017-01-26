@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Cleaning"
+make clean
+echo "Building"
+make debug_level=DEBUGL1
+if [ $? -eq 0 ];then
+    echo "******************"
+    echo "* Build Successful"
+    echo "******************"
+else    
+    echo "*****************"
+    echo "* Build Failed!!!"
+    echo "*****************"
+fi    
