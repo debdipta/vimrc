@@ -25,5 +25,6 @@ int main(int argc, char* argv[])
     unsigned long num = 12354213;
     printf("Number of bits=%d\n", numbits(num));
     printf("Number of bits=%d\n", numofbitsalgo(num));
+    printf("Number of bits=%d\n", numofbitsalgo(num));
     return 0;
 }
