@@ -12,7 +12,7 @@ cpu_monitor::~cpu_monitor()
 
 char* cpu_monitor::collect_data()
 {
-    return NULL;
+    return "CPU Usage 30%";
 }
 
 bool cpu_monitor::update_data( char* _data )

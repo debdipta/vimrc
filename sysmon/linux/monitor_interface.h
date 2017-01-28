@@ -6,7 +6,7 @@
 class monitor_interface
 {
 public:
-    virtual bool update_data( char* ) = 0;
+    virtual char* collect_data() = 0;
 };
 
 #endif

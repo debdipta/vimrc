@@ -12,7 +12,7 @@ io_monitor::~io_monitor()
 
 char* io_monitor::collect_data()
 {
-    return NULL;
+    return "IO Usage 20%";
 }
 
 bool io_monitor::update_data( char* _data )

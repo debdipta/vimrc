@@ -17,12 +17,11 @@ class hardware_monitor
     static hardware_monitor* _hardware_monitor; 
     hardware_monitor( const char* );
 protected:
-    bool get_update();
 public:
     ~hardware_monitor();
     static hardware_monitor* get_instance();
     bool register_monitors();
-
+    bool get_update();
 };
 
 #endif

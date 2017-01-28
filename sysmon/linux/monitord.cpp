@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-
+#include "hardware_monitor.h"
 #include "logger.h"
 
 int check_root_permission()
@@ -27,5 +27,9 @@ int main(int argc, char* argv[])
     LOG(L1,"Starting System Monitor Application");
 
     //License checker 
+
+
+    //test
+    hardware_monitor::get_instance()->get_update();
     return 0;
 }
