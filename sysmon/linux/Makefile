@@ -3,7 +3,7 @@ CFLAGS=-g -c
 LDFLAGS=
 DEBUG_FLAGS=-D$(debug_level)
 
-SOURCES=logger.cpp monitor.cpp
+SOURCES=logger.cpp monitord.cpp collector.cpp hardware_monitor.cpp cpu_monitor.cpp io_monitor.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=monitord
 
