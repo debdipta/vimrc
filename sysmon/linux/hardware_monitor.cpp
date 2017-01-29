@@ -34,10 +34,15 @@ bool hardware_monitor::register_monitors()
     return true;
 }
 
-bool hardware_monitor::get_update()
+char* hardware_monitor::get_update()
 {
     std::list<monitor_interface*>::iterator _monitor;
     for( _monitor = monitor_list.begin();_monitor != monitor_list.end(); _monitor++)    {
-       printf("%s", (*_monitor)->collect_data());
+       return (*_monitor)->collect_data();
     }
+}
+
+char* hardware_monitor::collect_data()
+{
+    return get_update();
 }

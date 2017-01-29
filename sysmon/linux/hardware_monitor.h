@@ -10,18 +10,19 @@
 it calls all objects for updated information, and send back to caller
 */
 
-class hardware_monitor
+class hardware_monitor : public monitor_interface
 {
     const char* name;
     std::list<monitor_interface*> monitor_list;
     static hardware_monitor* _hardware_monitor; 
     hardware_monitor( const char* );
+    bool register_monitors();
 protected:
 public:
     ~hardware_monitor();
     static hardware_monitor* get_instance();
-    bool register_monitors();
-    bool get_update();
+    char* get_update();
+    char* collect_data();
 };
 
 #endif

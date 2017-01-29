@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include "hardware_monitor.h"
+#include "collector.h"
 #include "logger.h"
 
 int check_root_permission()
@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
 
 
     //test
-    hardware_monitor::get_instance()->get_update();
+    collector* pcollector = new collector();
+    pcollector->trigger();
     return 0;
 }
