@@ -1,7 +1,7 @@
 /***********************
 * All Right Reserved @ Debdipta
 *
-***********************/
+************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include "collector.h"
 #include "logger.h"
+#include "cpu_monitor.h"
+#include "io_monitor.h"
+#include "common.h"
 
 int check_root_permission()
 {
@@ -28,7 +31,11 @@ int main(int argc, char* argv[])
 
     //License checker 
 
-
+//
+#ifdef __CPU__
+    new cpu_monitor("cpu_monitor");
+    new io_monitor("io_monitor");
+#endif
     //test
     collector* pcollector = new collector();
     pcollector->trigger();

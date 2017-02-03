@@ -12,6 +12,5 @@ public:
     cpu_monitor(const char*);
     ~cpu_monitor();
     char* collect_data();
-    bool update_data( char* );
 };
 #endif

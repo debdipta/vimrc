@@ -11,17 +11,17 @@ Singletone class to monitor all processes. Reads process list from a file and ke
 thread
 */
 
-class process_monitor : public monitor_interface
+class process_monitor
 {
     char* name;
     std::list<monitor_interface*> monitor_list;
     static process_monitor* _process_monitor;
     process_monitor(char *);
-    bool register_monitors();
+    bool register_monitors(monitor_interface*);
 public:
     ~process_monitor();
     static process_monitor* get_instance();
-    char* collect_data();
+    const char* collect_data();
 };
 
 #endif
