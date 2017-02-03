@@ -1,0 +1,154 @@
+set nocompatible
+
+execute $EXINIT
+
+set history=1000 " How many lines of history to remember
+
+set showcmd
+set hlsearch
+set incsearch
+set title
+set ruler " Always show current positions along the bottom
+set rulerformat=%150(%c%V\ %p%%%)
+
+set wildmenu
+set wildmode=list:longest
+set number
+set whichwrap+=<,>,[,],h,l
+
+set showmatch " show matching brackets
+set matchtime=5 " how many tenths of a second to blink matching brackets for
+set laststatus=2 " always show the status line
+set autoindent
+set cindent " do c-style indenting
+set nu
+set ts=8
+set sw=8
+set <PageDown>=
+set <PageUp>=
+set <End>=
+set <Home>=
+
+set tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=4
+
+set t_Co=256
+
+highlight Normal     ctermfg=white      ctermbg=black     cterm=NONE
+highlight Search     ctermfg=white      ctermbg=lightred     cterm=NONE
+highlight Cursor guibg=Green guifg=NONE
+set backspace=indent,eol,start
+"colors impact
+
+if has("terminfo")
+  let &t_Co=16
+  let &t_AB="\<Esc>[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm"
+  let &t_AF="\<Esc>[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm"
+else
+  let &t_Co=16
+  let &t_Sf="\<Esc>[3%dm"
+  let &t_Sb="\<Esc>[4%dm"
+endif
+
+" Vim uses a single double-quote to indicate comment-to-end-of-line.
+" Put these options last so the real vi won't abort this file until
+" it's done the things (above) it does understand.
+
+" set nobackup    " vim command to remove backups after successful writes
+" set ruler       " vim command to turn on the row/column display
+" set writebackup " vim command to protect original while writing buffer
+
+" When starting to edit a file:
+"   For *.c and *.h files set formatting of comments and set C-indenting on
+"   For other files switch it off
+"   Don't change the sequence, it's important that the line with * comes first.
+" autocmd BufRead                         * set formatoptions=tcql nocindent comments&
+" autocmd BufRead                         *.c,*.h set formatoptions=croql cindent comments=sr:/*,mb:*,el:*/,://
+" autocmd BufNewFile                    *.c :r ~/src/template.c
+"
+" Last modifed autocmd
+" This command executes when writing out a "*.[ch]" file and
+"       in the first 100 lines there is a Last Modified string
+"       of exactly the correct format.  This exact match prevents
+"       (or reduces the probability of) an unintended change of
+"       a string.
+" What it does is write a new string of the form below that has
+"       the current date and time in it.
+" Last Modified must be on a line with the string (delimited with + )
+"       +#pragma VERSIONID +
+" Last Modified must be of the form ( delimited with + );
+"       +Date: xxxx/xx/xx xx:xx:xx +
+" Where the 'x's are anything, but everything else (including spaces) must
+"       match.
+"
+" Example that works:
+"
+"  #pragma VERSIONID "@(#) ktracer.c $Date: 2006/04/11 17:30:52 $Revision: i80/cup2_cmuser_tl31i/2"
+"
+"
+" autocmd BufWritePre,FileWritePre *.[c]   ks|call LastMod()|'s
+" fun LastMod()
+"  if line("$") > 1000
+"    let l = 1000
+"  else
+"    let l = line("$")
+"  endif
+"  exe "1," . l . "g@#pragma VERSIONID @s@Date: ..../../.. ..:..:.. @Date: " .
+"  \ strftime("%Y/%m/%d %T ")
+" endfun
+
+color torte
+syntax on
+
+" make arrow keys work in visual mode
+vmap <Esc>OA k
+vmap <Esc>OB j
+vmap <Esc>OC l
+vmap <Esc>OD h
+" simulate shift-arrows (select block in windows) with control-arrows
+inoremap <Esc>[A <C-O>vk
+vnoremap <Esc>[A k
+inoremap <Esc>[B <C-O>vj
+vnoremap <Esc>[B j
+inoremap <Esc>[C <C-O>vl
+vnoremap <Esc>[C l
+inoremap <Esc>[D <C-O>vh
+vnoremap <Esc>[D h
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.*/
+
+" To make sure that start-up does not take along time, using this tweek
+" To come back to original either delete this line or replace below line with
+" following one
+"set clipboard=autoselect,exclude:cons\\\|linux\\\|screen
+
+set clipboard=autoselect,exclude:.*
+source ~/.cscope_maps.vim
+if has("cscope")
+    set csprg=/usr/local/bin/cscope
+        set csto=0
+        set cst
+        set nocsverb
+        " add any database in current directory
+        if filereadable("cscope.out")
+        cs add cscope.out
+        " else add database pointed to by environment
+        elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+        endif
+        set csverb
+endif
+
+map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+
+map <C-_> :cstag <C-R>=expand("<cword>")<CR><CR>
+map <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+map <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+map <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+map <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+map <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+map <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+map <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+map <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
