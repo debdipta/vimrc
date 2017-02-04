@@ -23,6 +23,17 @@ int check_root_permission()
     return 0;
 }
 
+void Initialize_monitors()
+{
+
+#ifdef __CPU__
+    new cpu_monitor("cpu_monitor");
+#endif
+#ifdef _IO___
+    new io_monitor("io_monitor");
+#endif
+}
+
 int main(int argc, char* argv[])
 {   
     if( -1 == check_root_permission())
@@ -31,11 +42,8 @@ int main(int argc, char* argv[])
 
     //License checker 
 
-//
-#ifdef __CPU__
-    new cpu_monitor("cpu_monitor");
-    new io_monitor("io_monitor");
-#endif
+// Initialize monitors
+    Initialize_monitors();
     //test
     collector* pcollector = new collector();
     pcollector->trigger();

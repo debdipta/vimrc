@@ -7,6 +7,7 @@ class monitor_interface
 {
 public:
     virtual char* collect_data() = 0;
+    virtual ~monitor_interface(){};
 };
 
 #endif

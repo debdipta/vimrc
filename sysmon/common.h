@@ -10,7 +10,7 @@
 */
 #define __CPU__
 #define __VIRTMEM__
-
+#define __IO__
 
 enum ERRORNO
 {
@@ -37,8 +37,10 @@ enum ERRORNO
 #endif
 #elif __linux__
 // linux
+#define __LINUX__
 #elif __unix__ // all unices not caught above
 // Unix
+#define __UNIX__
 #elif defined(_POSIX_VERSION)
 // POSIX
 #else
