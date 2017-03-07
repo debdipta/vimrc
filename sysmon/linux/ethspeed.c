@@ -9,20 +9,16 @@
 #include <string.h>
 #include <linux/if_link.h>
 
-typedef unsigned long long LINT_t;
+typedef unsigned long LINT_t;
 typedef unsigned int UINT_t;
 
 typedef struct RxTx
 {
     char ifa_name[256];
-    UINT_t tx_packets;
-    UINT_t rx_packets;
-    UINT_t tx_bytes;
-    UINT_t rx_bytes;
-    UINT_t tx_packets_sav;
-    UINT_t rx_packets_sav;
-    UINT_t tx_bytes_sav;
-    UINT_t rx_bytes_sav;
+    LINT_t tx_packets;
+    LINT_t rx_packets;
+    LINT_t tx_bytes;
+    LINT_t rx_bytes;
     struct RxTx* next;
 } RxTx;
 
@@ -70,36 +66,32 @@ static void get_net_details(struct RxTx** net_info)
 
 void printall(struct RxTx** net_info)
 {
-    UINT_t tot_pkt_tx_frme = 0, tot_pkt_rx_frme=0, tx_packets_frme=0, rx_packets_frme=0, tx_bytes_frme=0, rx_bytes_frme=0;
-    UINT_t tot_bytes_tx_frme = 0, tot_bytes_rx_frme = 0; 
-    static UINT_t tx_packets_sav, rx_packets_sav, tx_bytes_sav, rx_bytes_sav;
-    while(NULL != *net_info)   {
-        printf("%s:\ttx_packets: %-10u tx_packets_sav: %-10u rx_packets: %-10u tx_bytes: %-10u rx_bytes: %-10u\n", (*net_info)->ifa_name,
-        (*net_info)->tx_packets, tx_packets_sav, (*net_info)->rx_packets, (*net_info)->tx_bytes,  (*net_info)->rx_bytes);
-        tx_packets_sav = (*net_info)->tx_packets;
-        rx_packets_sav = (*net_info)->rx_packets;
-        tx_bytes_sav = (*net_info)->tx_bytes;
-        rx_bytes_sav = (*net_info)->rx_bytes;
-        tx_packets_frme = tx_packets_sav - (*net_info)->tx_packets;
-        rx_packets_frme = rx_packets_sav - (*net_info)->rx_packets;
-        tx_bytes_frme = tx_bytes_sav - (*net_info)->tx_bytes;
-        rx_bytes_frme = rx_bytes_sav - (*net_info)->rx_bytes;
+    LINT_t tot_pkt_tx_frme = 0, tot_pkt_rx_frme=0;
+    LINT_t tot_bytes_tx_frme = 0, tot_bytes_rx_frme = 0; 
+    static LINT_t tx_packets_sav=0, rx_packets_sav=0, tx_bytes_sav=0, rx_bytes_sav=0;
 
-        tot_pkt_tx_frme += tx_packets_frme;
-        tot_pkt_rx_frme += rx_packets_frme;
-        tot_bytes_tx_frme += tx_bytes_frme;
-        tot_bytes_rx_frme += rx_bytes_frme;
-        
-        tx_packets_sav = (*net_info)->tx_packets;
-        rx_packets_sav = (*net_info)->rx_packets;
-        tx_bytes_sav = (*net_info)->tx_bytes;
-        rx_bytes_sav = (*net_info)->rx_bytes;
+    while(NULL != *net_info)   {
+        //printf("%s:\ttx_packets: %-10lu rx_packets: %-10lu tx_bytes: %-10lu rx_bytes: %-10lu\n", (*net_info)->ifa_name, (*net_info)->tx_packets, (*net_info)->rx_packets, (*net_info)->tx_bytes,  (*net_info)->rx_bytes);
+
+        tot_pkt_tx_frme += (*net_info)->tx_packets; 
+        tot_pkt_rx_frme += (*net_info)->rx_packets;
+        tot_bytes_tx_frme += (*net_info)->tx_bytes;
+        tot_bytes_rx_frme += (*net_info)->rx_bytes;
 
         (*net_info) = (*net_info)->next;
     }
-    printf("pkt_tx: %-10u\tpkt_rx=%-10u\n", tot_pkt_tx_frme, tot_pkt_rx_frme);
-    printf("byte_tx: %-10u\tbyte_rx=%-10u\n", tot_bytes_tx_frme, tot_bytes_rx_frme);
+    tx_packets_sav = abs(tx_packets_sav - tot_pkt_tx_frme);
+    rx_packets_sav = abs(rx_packets_sav - tot_pkt_rx_frme);
+    tx_bytes_sav = abs(tx_bytes_sav - tot_bytes_tx_frme);
+    rx_bytes_sav = abs(rx_bytes_sav - tot_bytes_rx_frme);
+    printf("new_pkt_tx: %-10lu\tnew_rx_packets_sav: %-10lu\ttx_bytes_sav: %-10lu\trx_packets_sav: %-10lu\t\n",
+    tx_packets_sav, rx_packets_sav,tx_bytes_sav,rx_bytes_sav);
+    tx_packets_sav = tot_pkt_tx_frme;
+    rx_packets_sav = tot_pkt_rx_frme;
+    tx_bytes_sav = tot_bytes_tx_frme;
+    rx_bytes_sav = tot_bytes_rx_frme;
 }
+
 /* Function to delete the entire linked list */
 void deleteList(struct RxTx** head_ref)
 {
