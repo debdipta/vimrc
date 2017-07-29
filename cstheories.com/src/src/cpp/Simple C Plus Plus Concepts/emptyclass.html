@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  To ensure that the addresses of two different objects will be different. For the same reason, new always returns pointers to distinct objects. Consider:
+<pre class="prettyprint">
+        class Empty { };
+        void f()
+        {
+            Empty a, b;
+            if (&a == &b) cout << "impossible: report error to compiler supplier";
+            Empty* p1 = new Empty;
+            Empty* p2 = new Empty;
+            if (p1 == p2) cout << "impossible: report error to compiler supplier";
+        }   
+</pre>
+There is an interesting rule that says that an empty base class need not be represented by a separate byte:
+<pre class="prettyprint">
+        struct X : Empty {
+            int a;
+            // ...
+        };
+        void f(X* p)
+        {
+            void* p1 = p;
+            void* p2 = &p->a;
+            if (p1 == p2) cout << "nice: good optimizer";
+        }
+</pre>
+This optimization is safe and can be most useful. It allows a programmer to use empty classes to represent very simple concepts without overhead. Some current compilers provide this “empty base class optimization”.
+
+Moreover, “empty base class optimization” is no longer an optional optimization but a mandatory requirement on class layout as of C++11. Go beat up on your compiler vendor if it does not implement it properly.
+ </body>
+</html>

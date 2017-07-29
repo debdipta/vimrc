@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator">
+  <meta name="Author" content="">
+  <meta name="observer, observer design pattern, observer c++" content="">
+  <meta name="Description" content="">
+  <link rel="stylesheet" href="styles.css">
+  <title>Observer Design Pattern</title>
+ </head>
+ <body>
+	<div id="void pointer">
+	<h2>subject.h</h2>
+	<pre class="prettyprint">
+	
+		#ifndef __ISUBJECT__
+		#define __ISUBJECT__
+
+		#include "observer.h"
+		#include <iostream>
+		#include <list>
+
+		using namespace std;
+
+		class subject
+		{
+			list <observer*> list_observer;
+			public:
+				virtual ~subject();
+				virtual void attach(observer*);
+				virtual void detach(observer*);
+				virtual void notify();
+			protected:
+				subject();
+		};
+
+		#endif
+	</pre>	
+	<h2>subject.cpp</h2>
+	<pre class="prettyprint">
+		#include "subject.h"
+		subject::subject(){}
+
+		subject::~subject(){}
+
+		void subject::attach(observer* _observer)
+		{
+			list_observer.push_back(_observer);
+		}
+
+		void subject::detach(observer* _observer)
+		{
+			list_observer.remove(_observer);
+		}
+
+		void subject::notify()
+		{
+			list<observer*>::iterator it;
+			for(it = list_observer.begin(); it != list_observer.end(); it++)
+			{
+				(*it)->update(this);
+			}
+		}
+	</pre>
+	<h2>observer.h</h2>
+	<pre class="prettyprint">
+		#ifndef __IOBSERVER__
+		#define __IOBSERVER__
+
+		#include "subject.h"
+		class subject;
+		class observer
+		{
+		public:
+			virtual void update(subject *theChangedSubject) = 0;
+		};
+
+		#endif
+		</pre>
+	<h2>digitalclock.h</h2>
+	<pre class="prettyprint">
+		#ifndef __DIGITALCLOCK__
+		#define __DIGITALCLOCK__
+
+		#include "clocktimer.h"
+		#include "subject.h"
+
+		class digitalclock : public observer
+		{
+			clocktimer* _subject;
+			int mytime_hour, mytime_min, mytime_sec;
+			public:
+				digitalclock( clocktimer* _subject) : _subject(_subject)
+				{
+					_subject->attach(this);
+				};
+				~digitalclock()
+				{
+					_subject->detach(this);
+				};
+				virtual void update(subject*);
+				void draw();
+		};
+
+		#endif
+	</pre>
+	<h2>digitalclock.cpp</h2>
+	<pre class="prettyprint">
+		#include "digitalclock.h"
+		#include <stdio.h>
+
+		void digitalclock::update(subject* _changedSubject)
+		{
+			if(_changedSubject == _subject) {
+				mytime_hour =_subject->getHour(); 
+				mytime_min = _subject->getMin();
+				mytime_sec = _subject->getSec();
+			}
+		}
+		void digitalclock::draw()
+		{
+		   printf("Digital hour=%d, min=%d, sec=%d\n", mytime_hour, mytime_min, mytime_sec); 
+		}
+	</pre>
+	<h2>clocktimer.h</h2>
+	<pre class="prettyprint">
+		#ifndef __CLOCKTIMER__
+		#define __CLOCKTIMER__
+		#include "subject.h"
+		class clocktimer : public subject
+		{
+				int _hour, _min, _sec;
+
+				void updatetimes();
+			public:
+				clocktimer():_hour(0), _min(0), _sec(0)
+				{
+				};
+				virtual ~clocktimer();
+				int getHour();
+				int getMin();
+				int getSec();
+
+				void tick();
+		};
+		#endif
+	</pre>
+	<h2>clocktimer.cpp</h2>
+	<pre class="prettyprint">
+		#include "clocktimer.h"
+
+		clocktimer::~clocktimer(){}
+
+		int clocktimer::getHour()	{
+			return _hour;
+		}
+
+		int clocktimer::getMin()	{
+			return _min;
+		}
+
+		int clocktimer::getSec()	{
+			return _sec;
+		}
+
+		void clocktimer::tick()		{
+			updatetimes();
+			notify();
+		}
+
+		void clocktimer::updatetimes()		{
+			_hour++; _min++; _sec++;
+		}
+	</pre>
+
+	</br>
+	Links:
+	<div> <a href="https://github.com/debdipta/designpattern"> Implementation of Observer Design Pattern</a></div>
+
+ </body>
+</html>
