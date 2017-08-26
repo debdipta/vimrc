@@ -12,21 +12,23 @@
   <script src="js\bootstrap.min.js"></script>
   <script src="js\jquery.min.js"></script>
 	<script>
-	$(document).ready(function() {
+		$(document).ready(function() {
 		$("#menuitems a").click(function(e) {
 			//Do stuff when clicked
 			var tmp = $(e.target).attr("href") // clicked menu item
+			//alert(tmp)
 			var _id = tmp.split('/')[1]
 			//alert(_id)
 			var data_from_file = 'data_from_file_' + _id
 			var target = tmp.slice(1)
-			var _url = "get_text.php?get_data=true&file=" + target
+			//target += '.html'
+			var _url = "get_text.php?action=read_data_file&file=" + target + ".html"
 			//alert(_url)
 			$.ajax({
 			  type: "GET",
 			  url: _url,
 			  error: function(data){
-				alert("There was a problem");
+				alert("There was a problem while loading "+_url);
 			  },
 			  success: function(data){
 				  //alert(data);
@@ -36,6 +38,33 @@
 		});
 	});
 	</script>
+	<?php
+		function listFolderFiles($dir){
+			$ffs = scandir($dir);
+
+			unset($ffs[array_search('.', $ffs, true)]);
+			unset($ffs[array_search('..', $ffs, true)]);
+
+			// prevent empty ordered elements
+			if (count($ffs) < 1)
+				return;
+			foreach($ffs as $ff){
+				if(is_dir($dir.'/'.$ff)) 	{
+					echo '<a href=#'.$ff.' class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">'.$ff.'<i class="fa fa-caret-down"></i></a>';
+					echo '<div class="collapse" id='.$ff.'>';
+					//echo '<li>Folder:'.$ff;
+					listFolderFiles($dir.'/'.$ff);
+					echo '</div>';
+				}else	{
+					//echo 'File:'.strstr($ff,".html",true).'</li>';
+					$pos = strpos($ff, ".html");
+					if($pos === false)
+						continue;
+					echo '<div id="menuitems"><a href="#'.$dir.'/'. strstr($ff,".html",true).'" class="list-group-item">'. strstr($ff,".html",true).'</a></div>';
+				}
+			}
+		}
+	?>
 	  <style>
 		.list-group.panel > .list-group-item {
 		  border-bottom-right-radius: 4px;
@@ -72,35 +101,7 @@
 		  }
 		  .row.content {height:auto;} 
 		}
-	  </style>
-
-	<?php
-		function listFolderFiles($dir){
-			$ffs = scandir($dir);
-
-			unset($ffs[array_search('.', $ffs, true)]);
-			unset($ffs[array_search('..', $ffs, true)]);
-
-			// prevent empty ordered elements
-			if (count($ffs) < 1)
-				return;
-			foreach($ffs as $ff){
-				if(is_dir($dir.'/'.$ff)) 	{
-					echo '<a href=#'.$ff.' class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">'.$ff.'<i class="fa fa-caret-down"></i></a>';
-					echo '<div class="collapse" id='.$ff.'>';
-					//echo '<li>Folder:'.$ff;
-					listFolderFiles($dir.'/'.$ff);
-					echo '</div>';
-				}else	{
-					//echo 'File:'.strstr($ff,".html",true).'</li>';
-					$pos = strpos($ff, ".html");
-					if($pos === false)
-						continue;
-					echo '<div id="menuitems"><a href="#'.$dir.'/'.$ff.'" class="list-group-item">'. strstr($ff,".html",true).'</a></div>';
-				}
-			}
-		}
-	?>	  
+	  </style>  
 </head>
 
 <body>
@@ -146,15 +147,66 @@
 			</div>
 	
 			<div id="data_from_file_cpp" class="col-sm-8 text-left"> 
-				<h1>Welcome</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<hr>
-				<h3>Test</h3>
-				<p>Lorem ipsum...</p>
+				<h1 style="color: #5e9ca0;">Welcome to <span style="color: #2b2301;">cstheories.com</span></h1>
+				<p>
+					<span style="color:#008000;"><span style="font-family:comic sans ms,cursive;"><span style="font-size:18px;"><strong>This section describes about C++ Prgramming language</strong></span></span></span></p>
+				<p>
+					<span style="font-size:18px;"><span style="font-family:courier new,courier,monospace;"><strong>Introduction to Object:&nbsp;</strong></span></span></p>
+				<p>
+					<span style="font-family:courier new,courier,monospace;"><span style="font-size:16px;">In Object Oriented Programming like CPlusPlus, Object is an instance of a Class, that may consist of variables as data, functions as methods. &quot;Class&quot; in C++ means classification. Class helps in differenciating one object from another. While learning C++, it is important to learn the language syntaxes as well as &quot;the need&quot; moving into world of C++.</span></span></p>
+				<p>
+					<strong><span style="font-size:18px;"><span style="font-family:courier new,courier,monospace;">Connection between C and C++ :</span></span></strong></p>
+				<p>
+					<span style="font-family:courier new,courier,monospace;"><span style="font-size:16px;">There are couple of C features used in C++. And also some unique C++ concepts introduced in&nbsp;<strong>Opps</strong>. Difference in suructures in C &nbsp;and C++. How C++ class evolved from structure of C.</span></span></p>
+				<p>
+					<font face="courier new, courier, monospace"><span style="font-size: 18px;"><b>Data abstraction and hiding implementation:</b></span></font></p>
+				<p>
+					<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">C++ introduces a new way of creating data variables and abstracting those. In a C++ class, there are three types of access specifiers - private, protected and public.&nbsp;This means that you&nbsp;</span></span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">can separate the underlying implementation from the interface that&nbsp;</span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">the client programmer sees, and thus allow that implementation to&nbsp;</span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">be easily changed without affecting client code</span></p>
+				<p>
+					<span style="font-size:18px;"><strong style="font-family: &quot;courier new&quot;, courier, monospace; font-size: 18px;">Function overloading and default arguments:&nbsp;</strong></span></p>
+				<div>
+					<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">C++ allow to use same function name but with different parameters in a single library. This is intended to help managing big projects. This feature is called function overloading, ossible suing same function name as long as different parameters.</span></span></div>
+				<div>
+					&nbsp;</div>
+				<div>
+					<strong><span style="font-size:18px;"><span style="font-family:courier new,courier,monospace;">References and Copy constructor:</span></span></strong></div>
+				<div>
+					<span style="font-family:courier new,courier,monospace;"><span style="font-size:16px;">C pointer differs from C++ pointers by strong type checking feature in c++. C++ also allows to pass variables in parameters as reference. Also there is concept of copy constructor, that controls how an object can be sent in function parameters and returned from.</span></span></div>
+				<div>
+					&nbsp;</div>
+				<div>
+					<span style="font-size:18px;"><strong><span style="font-family:courier new,courier,monospace;">Operator Overloading:</span></strong></span></div>
+				<div>
+					<span style="font-family:courier new,courier,monospace;">In operator overloading, C++ allows to customise usage of different operators. Sometings to make some addtional type checking, operator overloading is required. Also in order to make an operator member to the class.</span></div>
+				<div>
+					&nbsp;</div>
+				<div>
+					<span style="font-size:18px;"><strong><span style="font-family:courier new,courier,monospace;">Dynamic object creation:</span></strong></span></div>
+				<div>
+					<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">C++ have to operator, operator <strong>new</strong> to allocate buffer in heap, <strong>delete </strong>operator to release from heap. These two operators can also be overloaded to control allocation of buffer in heap.</span></span></div>
+				<div>
+					&nbsp;</div>
+				<div>
+					<strong><span style="font-size:18px;"><span style="font-family:courier new,courier,monospace;">Inheritance and composition:</span></span></strong></div>
+				<div>
+					<div>
+						<span style="font-family:courier new,courier,monospace;"><span style="font-size:16px;">Data abstraction allows&nbsp;</span></span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">us to create new types from scratch, but with composition and&nbsp;</span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">inheritance, we can create new types from existing types. With&nbsp;</span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">composition, a new type can be assambled using other types as pieces,&nbsp;</span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">and with inheritance, a more specific version of an&nbsp;</span><span style="font-size: 16px; font-family: &quot;courier new&quot;, courier, monospace;">existing types are craeted.</span></div>
+					<div>
+						&nbsp;</div>
+					<div>
+						<span style="font-size:18px;"><strong><span style="font-family:courier new,courier,monospace;">Polymorphism and Virtual functions:</span></strong></span></div>
+					<div>
+						<span style="font-family:courier new,courier,monospace;">Polymorphism is usage of inheritance to create a family of types.</span></div>
+					<div>
+						&nbsp;</div>
+					<div>
+						<span style="font-size:18px;"><strong><span style="font-family:courier new,courier,monospace;">Templates:</span></strong></span></div>
+					<div>
+						<div>
+							<span style="font-family:courier new,courier,monospace;">Templates allow to reuse source code&nbsp;</span><span style="font-family: &quot;courier new&quot;, courier, monospace;">by providing the compiler with a way to substitute type names in&nbsp;</span><span style="font-family: &quot;courier new&quot;, courier, monospace;">the body of a class or function. This supports the use of container&nbsp;</span><span style="font-family: &quot;courier new&quot;, courier, monospace;">class libraries, which are important tools for the rapid, robust&nbsp;</span><span style="font-family: &quot;courier new&quot;, courier, monospace;">development of object-oriented programs</span></div>
+					</div>
+				</div>
+				<h3>Go through right table learning from scratch and example</h3>
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
