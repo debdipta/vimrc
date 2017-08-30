@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<div id="This is test"><p>
+<h1>Code Coverage</h1>
+		<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			&nbsp;</p>
+		<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			&nbsp;</p>
+		<p>
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;"><span style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">In computer science testing methodologies, Code Coverage of a program used to describe the degree to which the source code of a program is tested by a particular test suite. The probability of having software bug of more in program that have less code coverage measurement. This is one of invented methods invented for systematic software testing.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">Coverage Metrics: To measure what percentage of code has been exercised by a test suite, one or more coverage criteria are used. Coverage criteria is usually defined as a rule or requirement, which test suite needs to satisfy.</span></span></span></p>
+		<ol>
+			<li>
+				<span style="font-family:courier new,courier,monospace;"><span style="font-size:16px;"><span style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">Statement Coverage: This metric reports whether each executable statement is encountered. Control-flow statements, such as if, for, and switch are covered There are implicit statements, such as an omitted return, are not part of statement coverage.</span></span></span></li>
+			<li>
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;"><span style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">Decision Coverage: In control structures like if-else and while statement, This metric reports whether Boolean expressions are tested or not. This is also known as branch coverage.</span></span></span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);" />
+				&nbsp;</li>
+			<li>
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;"><span style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">Condition Coverage: Condition coverage reports whether every possible combination of conditions occurs. The test cases required for full multiple condition coverage of a decision are given by the logical operator truth table for the decision.</span></span></span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);" />
+				&nbsp;</li>
+		</ol>
+		<p>
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;"><span style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);">Let us take an example of below code:</span></span></span></p>
+		<p>
+			&nbsp;</p>
+		<p>
+			&nbsp;</p>
+
+<pre class="prettyprint">
+int condition (int x, int y)
+{
+    int var = 0;
+    if ((x>0) && (y>0))
+    {
+        var = x;
+    }
+    return var;
+}
+
+</pre>
+		<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Assume this function is a part of some bigger program and this program was run with some test suite<br style="box-sizing: border-box;" />
+			If during this execution function condition was called at least once, then function coverage for this function is satisfied.</span></span><br style="box-sizing: border-box;" />
+			&nbsp;</p>
+		<ul>
+			<li style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Statement coverage for this function will be satisfied if it was called e.g. as condition(1,1), as in this case, every line in the function is executed including z = x;.</span></span></li>
+			<li style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Tests calling condition(1,1) and condition (0,1) will satisfy branch coverage because, in the first case, the 2 if conditions are met and z = x; is executed, while in the second case, the first condition (x&gt;0) is not satisfied, which prevents executing z = x;.</span></span><br style="box-sizing: border-box;" />
+				&nbsp;</li>
+			<li style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Condition coverage can be satisfied with tests that call condition (1,1), condition (1,0) and condition (0,0). These are necessary because in the first two cases, (x&gt;0) evaluates to true, while in the third, it evaluates false. At the same time, the first case makes (y&gt;0) true, while the second and third make it false.&nbsp;</span></span><br style="box-sizing: border-box;" />
+				&nbsp;</li>
+		</ul>
+		<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			<br style="box-sizing: border-box;" />
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">There are two major code coverage tool are widely used for C/C++ coverage testing: </span></span></p>
+		<ol>
+			<li style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Bullseye </span></span></li>
+			<li style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+				<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">gcov</span></span></li>
+		</ol>
+		<p>
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">There are two techniques for achieving of code coverage: <strong>Intrusive </strong>and <strong>non-Intrusive</strong> approach.</span></span></p>
+		<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;"><strong>Intrusive Approach:</strong> A common approach is to use a tool that generates a modified (instrumented) version of the application source code, or to compile the application with a special switch to generate instrumented object code. The added code contains calls to appropriate logging functions that&rsquo;s write back coverage data to a file. This is not necessarily a simple task. Below is an example of instrumented code compiled with Bullseye:</span></span></p>
+<pre class="prettyprint">
+line 19 "/usr/include/pthread.h"
+#pragma pop
+#line 12 "coverage.c"
+int init_global_var = 5;
+int uninit_global_var;
+#line 100 "/build/BE/1131_IA_IC155v/opt/ccover/bin/../include/BullseyeCoverage_definitions"
+static char cov_o_data_1756f3d2[      11];
+static struct cov_O_1756f3d2 cov_o_1756f3d2 = {
+0x5a6b, 6407, 0, cov_o_data_1756f3d2, 0x5b9ed845, sizeof(cov_o_data_1756f3d2), 0, 0, 0, "coverage.o"
+};
+#line 16 "coverage.c"
+int LCSAJ(void)
+{if(!cov_o_data_1756f3d2[0])cov_probe_6_4_7(&cov_o_1756f3d2,0);
+#line 17
+{
+    int count = 0, totals[26], val = 0;
+    memset (totals, 0, 26 * sizeof(int));
+    while (((( count < 750)&&((cov_o_data_1756f3d2[2]=1),1))||((cov_o_data_1756f3d2[1]=1),0)) ) {
+        val = abs(rand()) % 26;
+        totals[val] += 1;
+        if (((( totals[val] > 90)&&((cov_o_data_1756f3d2[4]=1),1))||((cov_o_data_1756f3d2[3]=1),0)) ) {
+            totals[val] = 90;
+        }
+        count++;
+    }
+    return count;
+}}
+
+</pre>
+<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">We can check that in above code it have added probe named as cov_o_data_1756f3d2[ 11]; Below is text segment, data segment and bss segment for a normal binary built with gcc:</span></span></p>
+		<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			&nbsp;</p>
+<pre class="prettyprint">
+ubuntu@ip-172-31-16-249:~/mycode$ size a.out
+   text    data     bss     dec     hex filename
+   1262     560       8    1830     726 a.out </pre>
+<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Whereas, if we build it with # gcc -fprofile-arcs -ftest-coverage switch.c, the data, bss and text segment changes:</span></span></p>
+		
+<pre class="prettyprint">
+ubuntu@ip-172-31-16-249:~/mycode$ size a.out
+   text    data     bss     dec     hex filename
+  14182    1008    4264   19454    4bfe a.out
+  </pre>
+<div id="This is test" style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">
+			<span style="font-size:16px;"><span style="font-family:courier new,courier,monospace;">Instrumentation based techniques can incur considerable overhead by adding a large number of conditional statements to the original code, which in turn, can significantly increase the program&rsquo;s execution space. The problem becomes even worse as the complexity of the coverage criterion increases, both in terms of the number of coverage obligations and the number of operators in each obligation.</span></span>
+			<p style="box-sizing: border-box; margin: 0px 0px 10px;">
+
+</div>
+</html>
