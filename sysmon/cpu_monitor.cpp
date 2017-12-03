@@ -7,6 +7,8 @@
 cpu_monitor::cpu_monitor(const char* _name)
 {
     name = _name;
+    header = "<cpu_details>";
+    footer = "</cpu_details>";
     monitor =  NULL;
 #ifdef __LINUX__
     monitor = new linux_cpu_monitor();
@@ -29,12 +31,24 @@ cpu_monitor::~cpu_monitor()
     }
 }
 
-char* cpu_monitor::collect_data()
+const char* cpu_monitor::collect_data()
 {
+    char output[2048];
+    format.clear();
+    format += header;
 //   Prepare appropiate monitor type 
 #ifdef __LINUX__
     linux_cpu_monitor *_monitor = dynamic_cast<linux_cpu_monitor*>(monitor);
 #endif
-    sprintf(output, "CPU: %d", (_monitor)->get_cpu_number());
-    return output;
+    sprintf(output, "<cpu_number>%d</cpu_number>", (_monitor)->get_cpu_number());
+
+   format += output; 
+
+   format += footer;
+    
+    
+    
+    
+    
+    return format.c_str();
 }

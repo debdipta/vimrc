@@ -15,5 +15,5 @@ $(EXECUTABLE): $(OBJECTS)
 .cpp.o:
 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) $< -o $@
 clean:
-	rm -rf *.o $(EXECUTABLE) 
+	rm -rf linux\*.o *.o $(EXECUTABLE) 
 

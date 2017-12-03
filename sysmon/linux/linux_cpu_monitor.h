@@ -9,7 +9,7 @@ public:
     ~linux_cpu_monitor();
 
     int get_cpu_number();
-    char* collect_data();
+    const char* collect_data();
 };
 
 #endif
