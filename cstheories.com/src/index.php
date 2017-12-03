@@ -8,6 +8,7 @@
 			enable_page_level_ads: true
 		});
 	</script>
+</script>
   <title>CS Concepts</title>
   <meta charset="utf-8">
   <link rel=icon href="favicon.ico">
@@ -216,22 +217,22 @@
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<a><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<script>
 					(adsbygoogle = window.adsbygoogle || []).push({
 						google_ad_client: "ca-pub-8105909949822350",
 						enable_page_level_ads: true
 					});
-				</script>
+				</script></a>
 				</div>
 				<div class="well">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<a><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<script>
 					(adsbygoogle = window.adsbygoogle || []).push({
 						google_ad_client: "ca-pub-8105909949822350",
 						enable_page_level_ads: true
 					});
-				</script>
+				</script></a>
 				</div>
 			</div>
 		  </div>
@@ -380,13 +381,13 @@
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<a><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<script>
 						(adsbygoogle = window.adsbygoogle || []).push({
 							google_ad_client: "ca-pub-8105909949822350",
 							enable_page_level_ads: true
 						});
-					</script>
+					</script></a>
 				</div>
 				<div class="well">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
