@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({
+			google_ad_client: "ca-pub-8105909949822350",
+			enable_page_level_ads: true
+		});
+	</script>
   <title>CS Concepts</title>
   <meta charset="utf-8">
   <link rel=icon href="favicon.ico">
@@ -499,7 +506,7 @@
 			<div id="data_from_file_analytics" class="col-sm-8 text-left"> 
 				<h1 style="color: #5e9ca0;">Welcome to <span style="color: #2b2301;">cstheories.com</span></h1>
 				<p>
-					<span style="color:#008000;"><span style="font-family:comic sans ms,cursive;"><span style="font-size:18px;"><strong>This section describes about Analytics, Macine learning and Statistics</strong></span></span></span></p>
+					<span style="color:#008000;"><span style="font-family:comic sans ms,cursive;"><span style="font-size:18px;"><strong>This section describes about Analytics, Machine learning and Statistics</strong></span></span></span></p>
 				<p>
 					<strong><span style="color:#006400;"><span style="font-size:36px;"><span style="font-family:courier new,courier,monospace;">Analytics</span></span></span></strong></p>
 				<p>
