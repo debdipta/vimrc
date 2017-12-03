@@ -216,10 +216,22 @@
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
-					<p>ADS</p>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({
+						google_ad_client: "ca-pub-8105909949822350",
+						enable_page_level_ads: true
+					});
+				</script>
 				</div>
 				<div class="well">
-					<p>ADS</p>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({
+						google_ad_client: "ca-pub-8105909949822350",
+						enable_page_level_ads: true
+					});
+				</script>
 				</div>
 			</div>
 		  </div>
@@ -368,10 +380,22 @@
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
-					<p>ADS</p>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({
+							google_ad_client: "ca-pub-8105909949822350",
+							enable_page_level_ads: true
+						});
+					</script>
 				</div>
 				<div class="well">
-					<p>ADS</p>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({
+						google_ad_client: "ca-pub-8105909949822350",
+						enable_page_level_ads: true
+					});
+				</script>
 				</div>
 			</div>
 		  </div>
