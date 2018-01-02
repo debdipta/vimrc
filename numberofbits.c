@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+ 
 int numbits(unsigned long num)
 {   
     unsigned int count = 0;
